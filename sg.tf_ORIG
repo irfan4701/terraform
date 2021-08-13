@@ -1,0 +1,44 @@
+resource "aws_security_group" "jump_sg" {
+  name        = "jump_sg"
+  description = "Used for access to the dev instance"
+  vpc_id      = aws_vpc.terra_vpc.id
+
+  #SSH
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "wakau_app_sg" {
+  name        = "wakau_app_sg"
+  description = "Used for access to the dev instance"
+  vpc_id      = aws_vpc.terra_vpc.id
+
+  #SSH
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["172.17.0.0/16"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
